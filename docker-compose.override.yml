@@ -20,5 +20,6 @@ services:
     #env_file: .env.local
     environment:
       BLACKFIRE_LOG_LEVEL: 4
+      BLACKFIRE_DISABLE_LEGACY_PORT: 1
     ports: [8307]
 ###< blackfireio/blackfire-symfony-meta ###
