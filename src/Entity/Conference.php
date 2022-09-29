@@ -2,26 +2,37 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ConferenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: ConferenceRepository::class)]
 #[UniqueEntity('slug')]
+#[ApiResource(
+    collectionOperations: ['get' => ['normalization_context' => ['groups' => 'conference:list']]],
+    itemOperations: ['get' => ['normalization_context' => ['groups' => 'conference:item']]],
+    order: ['year' => 'DESC', 'city' => 'ASC'],
+    paginationEnabled: false,
+)]
 class Conference
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['conference:list', 'conference:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['conference:list', 'conference:item'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 4)]
+    #[Groups(['conference:list', 'conference:item'])]
     private ?string $year = null;
 
     #[ORM\Column]
@@ -31,6 +42,7 @@ class Conference
     private Collection $comments;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Groups(['conference:list', 'conference:item'])]
     private ?string $slug = null;
 
     public function __construct()
