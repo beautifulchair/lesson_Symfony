@@ -16,6 +16,8 @@ web:
             scripts: false
             expires: 10m
 
+type: 'php:8.0'
+
 hooks:
     build: |
         set -x -e
