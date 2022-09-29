@@ -4,7 +4,7 @@
 
 {% block body %}
     <h2 class="mb-5">
-        Give your feedback!
+        {{ 'Give your feedback!'|trans }}
     </h2>
 
     {% for row in conferences|batch(4) %}
@@ -20,8 +20,8 @@
                             </div>
 
                             <a href="{{ path('conference', { slug: conference.slug }) }}"
-                               class="btn btn-sm btn-primary stretched-link">
-                                View
+                                class="btn btn-sm btn-primary stretched-link">
+                                {{ 'View'|trans }}
                             </a>
                         </div>
                     </div>
