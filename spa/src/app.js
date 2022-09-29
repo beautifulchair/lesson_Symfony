@@ -1,3 +1,5 @@
+import '../assets/styles/app.scss';
+
 import {h, render} from 'preact';
 import {Router, Link} from 'preact-router';
 
